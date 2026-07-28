@@ -161,7 +161,6 @@ else ifeq ($(platform), psl1ght)
    AR = $(PS3DEV)/ppu/bin/ppu-ar$(EXE_EXT)
    ENDIANNESS_DEFINES =  -DWORDS_BIGENDIAN -DMSB_FIRST
    PLATFORM_DEFINES += -D__PSL1GHT__
-   EXTERNAL_ZLIB = 1
 	STATIC_LINKING = 1
 else ifeq ($(platform), vita)
    TARGET := $(TARGET_NAME)_libretro_$(platform).a
@@ -170,7 +169,6 @@ else ifeq ($(platform), vita)
 	CXX = arm-vita-eabi-g++$(EXE_EXT)
 	AR = arm-vita-eabi-ar$(EXE_EXT)
    PLATFORM_DEFINES += -DVITA
-   EXTERNAL_ZLIB = 1
 	STATIC_LINKING = 1
 
 # Classic Platforms ####################
@@ -225,11 +223,9 @@ else ifeq ($(platform), ngc)
    ENDIANNESS_DEFINES =  -DWORDS_BIGENDIAN -DMSB_FIRST
    PLATFORM_DEFINES := -DGEKKO -DHW_DOL -mrvl -mcpu=750 -meabi -mhard-float
    PLATFORM_DEFINES += -U__INT32_TYPE__ -U __UINT32_TYPE__ -D__INT32_TYPE__=int
-   EXTERNAL_ZLIB = 1
 	STATIC_LINKING = 1
 else ifeq ($(platform), ctr)
    TARGET := $(TARGET_NAME)_libretro_$(platform).a
-   EXTERNAL_ZLIB = 1
    CC = $(DEVKITARM)/bin/arm-none-eabi-gcc$(EXE_EXT)
    CXX = $(DEVKITARM)/bin/arm-none-eabi-g++$(EXE_EXT)
    AR = $(DEVKITARM)/bin/arm-none-eabi-ar$(EXE_EXT)
@@ -241,7 +237,6 @@ else ifeq ($(platform), ctr)
    CXXFLAGS = $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
    CPU_ARCH := arm
    STATIC_LINKING = 1
-   EXTERNAL_ZLIB = 1
 else ifeq ($(platform), wii)
    TARGET := $(TARGET_NAME)_libretro_$(platform).a
    include $(DEVKITPPC)/wii_rules
@@ -252,7 +247,6 @@ else ifeq ($(platform), wii)
    ENDIANNESS_DEFINES =  -DWORDS_BIGENDIAN -DMSB_FIRST
    PLATFORM_DEFINES :=  -DWII_VM -DGEKKO -DHW_RVL -mrvl -mcpu=750 -meabi -mhard-float
    PLATFORM_DEFINES += -U__INT32_TYPE__ -U __UINT32_TYPE__ -D__INT32_TYPE__=int
-   EXTERNAL_ZLIB = 0
    STATIC_LINKING = 1
 
 else ifeq ($(platform), wiiu)
@@ -263,7 +257,6 @@ else ifeq ($(platform), wiiu)
    ENDIANNESS_DEFINES =  -DWORDS_BIGENDIAN -DMSB_FIRST
    PLATFORM_DEFINES := -DGEKKO -DHW_RVL -ffunction-sections -fdata-sections 
    PLATFORM_DEFINES += -D__wiiu__ -D__wut__ -mcpu=750 -meabi -mhard-float
-   EXTERNAL_ZLIB = 1
    STATIC_LINKING = 1
 
 else ifneq (,$(findstring armv,$(platform)))
@@ -294,7 +287,6 @@ else ifeq ($(platform), emscripten)
    TARGET := $(TARGET_NAME)_libretro_$(platform).bc
    PLATFORM_DEFINES := -DUSE_FILE32API
    ENDIANNESS_DEFINES := -DNO_UNALIGNED_MEM
-   EXTERNAL_ZLIB = 1
 	STATIC_LINKING = 1
 
 # GCW0
